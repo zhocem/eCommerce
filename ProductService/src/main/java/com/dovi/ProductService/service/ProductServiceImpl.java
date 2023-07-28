@@ -1,6 +1,7 @@
 package com.dovi.ProductService.service;
 
 import com.dovi.ProductService.entity.Product;
+import com.dovi.ProductService.exception.ProductServiceCustomException;
 import com.dovi.ProductService.model.ProductRequest;
 import com.dovi.ProductService.model.ProductResponse;
 import com.dovi.ProductService.repository.ProductRepository;
@@ -36,7 +37,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse getProductById(long productId) {
         log.info("Getting product for productId: {}", productId);
-        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product witn given id not found"));
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductServiceCustomException("Product witn given id not found", "PRODUCT_NOT_FOUND"));
         ProductResponse productResponse = new ProductResponse();
         BeanUtils.copyProperties(product, productResponse);
         return productResponse;
