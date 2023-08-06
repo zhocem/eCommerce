@@ -1,5 +1,6 @@
 package com.dovi.OrderService.entity;
 
+import com.dovi.OrderService.model.PaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +27,5 @@ public class Order {
     private Instant date;
     private String status;
     private long amount;
+    private PaymentMode paymentMode;
 }
