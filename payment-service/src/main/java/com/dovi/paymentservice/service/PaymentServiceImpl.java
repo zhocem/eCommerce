@@ -26,7 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         TransactionDetails transaction = TransactionDetails.builder()
                 .paymentDate(Instant.now())
-                .paymentMode(String.valueOf(paymentRequest.getPaymentMode()))
+                .paymentMode(paymentRequest.getPaymentMode())
                 .paymentStatus("SUCCESS")
                 .orderId(paymentRequest.getOrderId())
                 .amount(paymentRequest.getAmount())
@@ -45,12 +45,14 @@ public class PaymentServiceImpl implements PaymentService {
         log.info("Getting payment details for order id {}", orderId);
         TransactionDetails transactionDetails = transactionDetailsRepository.findByOrderId(Long.parseLong(orderId));
 
+
+
         return PaymentResponse.builder()
                 .paymentId(transactionDetails.getId())
                 .orderId(transactionDetails.getOrderId())
                 .status(transactionDetails.getPaymentStatus())
                 .amount(transactionDetails.getAmount())
-                .paymentMode(PaymentMode.valueOf(transactionDetails.getPaymentMode()))
+                .paymentMode(transactionDetails.getPaymentMode())
                 .paymentDate(transactionDetails.getPaymentDate())
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.dovi.paymentservice.entity;
 
+import com.dovi.paymentservice.model.PaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class TransactionDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long orderId;
-    private String paymentMode;
+    private PaymentMode paymentMode;
     private String referenceNumber;
     private Instant paymentDate;
     private String paymentStatus;
